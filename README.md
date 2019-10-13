@@ -6,6 +6,7 @@ A few of my plain, dead simple and copy-pasted dotfiles.
 
 - tmux
 - vim
+- neovim
 - git
 - i3wm
 - i3blocks
