@@ -67,21 +67,22 @@ let g:pear_tree_smart_backspace = 1
 
 " Vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'          " Sensible default settings.
-Plug 'tpope/vim-commentary'        " Comment out stuff with gc.
-Plug 'tpope/vim-unimpaired'        " More bindings for square brackets.
-Plug 'tpope/vim-repeat'            " Let plugins repeatsuff with dot.
-Plug 'machakann/vim-sandwich'      " Surround stuff with sa, sd and sr.
-Plug 'junegunn/vim-easy-align'     " Align stuff with ga.
-Plug 'nathanalderson/yang.vim'     " YANG syntax.
-Plug 'wellle/targets.vim'          " Add more targets, like cia (change in argument).
-Plug 'ericcurtin/CurtineIncSw.vim' " Toggle header/src (C/C++).
-Plug 'moll/vim-bbye'               " Close and delete buffers (Bdelete/Bwipeout).
-Plug 'tmsvg/pear-tree'             " Pair parenthesis automagically.
-Plug 'itchyny/lightline.vim'       " Status line.
-Plug 'arcticicestudio/nord-vim'    " Nord theme.
+Plug 'tpope/vim-sensible'             " Sensible default settings.
+Plug 'tpope/vim-commentary'           " Comment out stuff with gc.
+Plug 'tpope/vim-unimpaired'           " More bindings for square brackets.
+Plug 'tpope/vim-repeat'               " Let plugins repeatsuff with dot.
+Plug 'machakann/vim-sandwich'         " Surround stuff with sa, sd and sr.
+Plug 'junegunn/vim-easy-align'        " Align stuff with ga.
+Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces
+Plug 'nathanalderson/yang.vim'        " YANG syntax.
+Plug 'wellle/targets.vim'             " Add more targets, like cia (in argument).
+Plug 'ericcurtin/CurtineIncSw.vim'    " Toggle header/src (C/C++).
+Plug 'moll/vim-bbye'                  " Close and delete buffers (Bdelete/Bwipeout).
+Plug 'tmsvg/pear-tree'                " Pair parenthesis automagically.
+Plug 'itchyny/lightline.vim'          " Status line.
+Plug 'arcticicestudio/nord-vim'       " Nord theme.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'            " Fuzzy find.
+Plug 'junegunn/fzf.vim'               " Fuzzy find.
 call plug#end()
 
 " Colorscheme
