@@ -17,6 +17,9 @@ set expandtab
 " Case insensitive-ish search
 set smartcase
 
+" Highlight the current line
+set cursorline
+
 " Copy to the end of line
 noremap Y y$
 
