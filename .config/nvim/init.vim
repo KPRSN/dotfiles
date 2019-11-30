@@ -15,10 +15,14 @@ set shiftwidth=4
 set expandtab
 
 " Case insensitive-ish search
+set ignorecase
 set smartcase
 
 " Highlight the current line
 set cursorline
+
+" Align function arguments
+:set cino+=(0
 
 " Copy to the end of line
 noremap Y y$
@@ -27,14 +31,51 @@ noremap Y y$
 set splitbelow
 set splitright
 
+" Live substitutions
+set inccommand=nosplit
+
+" Highlight lines overflowing 120 characters
+call matchadd('ErrorMsg', "\\%120v.\\+", 100)
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid, when inside an event handler
+" (happens when dropping a file on gvim) and for a commit message (it's
+" likely a different one than last time).
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
+
+" Only show cursor line in active window
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
+" Fuzzy-find git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
 " Use space as leader key
 let mapleader = "\<Space>"
 
-" Finding
-:nmap <leader>fr :FZF
-:nmap <leader>fF :FZF <c-r>=expand("%:p:h")<CR>
-:nmap <leader>ff :FZF %:p:h<CR>
+" Finding files
+:nmap <leader>ff :FZF <CR>
+:nmap <leader>fF :FZF <C-R>=expand("%:p:h")<CR>
+:nmap <leader>fr :FZF %:p:h<CR>
+
+" Jumping between header and source
 :nmap <leader>fa :call CurtineIncSw()<CR>
+
+" Git greping
+:nmap <leader>fg :GGrep 
+:nmap <leader>/ :GGrep <C-R>=expand("<cword>")<CR>
+:nmap <leader>* :GGrep <C-R>=expand("<cword>")<CR><CR>
+
+" Git blaming
+:nmap <leader>gb :Gblame<CR>
 
 " Buffers
 :nmap <leader>bb :Buffers<CR>
@@ -54,6 +95,26 @@ let mapleader = "\<Space>"
 :nmap <leader>l <C-w>l
 :nmap <leader>p <C-w>p
 
+" Less snappy window switching
+:nmap <leader>wh <C-w>h
+:nmap <leader>wj <C-w>j
+:nmap <leader>wk <C-w>k
+:nmap <leader>wl <C-w>l
+:nmap <leader>wp <C-w>p
+
+" Opening and closing windows
+:nmap <leader>wc <C-w>c
+:nmap <leader>w/ :vs<CR>
+:nmap <leader>w- :sp<CR>
+
+" Save all files and build
+":nmap <leader>cc :AsyncRun -save=2 BUILDCOMMAND<CR>
+":nmap <leader>cC :AsyncRun -save=2 BUILDCOMMAND
+
+" Open and close the quickfix window
+:nmap <leader>co :copen<CR>
+:nmap <leader>ch :cclose<CR>
+
 " Previous buffer
 :nmap <leader><Tab> <C-^>
 
@@ -61,19 +122,25 @@ let mapleader = "\<Space>"
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAl
+nmap ga <Plug>(EasyAlign)
 
 " Enable smart pairs (e.g. parenthesis, brackets and stuff)
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 
+" Open quickfix window when building and let it scroll
+let g:asyncrun_open = 20
+let g:asyncrun_last = 2
+
 " Vim-plug
 call plug#begin('~/.vim/plugged')
+
 Plug 'tpope/vim-sensible'             " Sensible default settings.
 Plug 'tpope/vim-commentary'           " Comment out stuff with gc.
 Plug 'tpope/vim-unimpaired'           " More bindings for square brackets.
 Plug 'tpope/vim-repeat'               " Let plugins repeatsuff with dot.
+Plug 'tpope/vim-abolish'              " Preserve case substitute neatly with :S.
 Plug 'machakann/vim-sandwich'         " Surround stuff with sa, sd and sr.
 Plug 'junegunn/vim-easy-align'        " Align stuff with ga.
 Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces
@@ -81,13 +148,48 @@ Plug 'nathanalderson/yang.vim'        " YANG syntax.
 Plug 'wellle/targets.vim'             " Add more targets, like cia (in argument).
 Plug 'ericcurtin/CurtineIncSw.vim'    " Toggle header/src (C/C++).
 Plug 'moll/vim-bbye'                  " Close and delete buffers (Bdelete/Bwipeout).
-Plug 'tmsvg/pear-tree'                " Pair parenthesis automagically.
+Plug 'tmsvg/pear-tree'                " Pair parenthesis automagically (alt. jiangmiao/auto-pairs).
+Plug 'chaoren/vim-wordmotion'         " Delimit words by underscores and camelcases.
+Plug 'sheerun/vim-polyglot'           " Massive language pack (syntax highlight everything).
+Plug 'tpope/vim-fugitive'             " A lot of GIT.
+Plug 'skywind3000/asyncrun.vim'       " Asyncronous building.
 Plug 'itchyny/lightline.vim'          " Status line.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
+
+" LSP client for references, definitions, renaming etc.
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" Fuzzy find.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'               " Fuzzy find.
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 " Colorscheme
-colorscheme nord
+let g:nord_cursor_line_number_background = 1
 let g:lightline = { 'colorscheme': 'nord' }
+colorscheme nord
+
+" CCLS LSP Setup
+"let ccls_path = '/path/to/ccls'
+"let g:LanguageClient_serverCommands = {
+"    \ 'c': [ccls_path, '--log-file=/tmp/cc.log'],
+"    \ 'cpp': [ccls_path, '--log-file=/tmp/cc.log'],
+"    \ }
+
+"let g:LanguageClient_loadSettings = 1
+"let g:LanguageClient_settingsPath = expand('~/.config/nvim/lsp_settings.json')
+
+" https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
+let g:LanguageClient_hasSnippetSupport = 0
+
+:nmap <leader>gg :call LanguageClient_contextMenu()<CR>
+:nmap <leader>gd :call LanguageClient#textDocument_definition()<CR>
+:nmap <leader>gr :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
+:nmap <leader>gR :call LanguageClient#findLocations({'method':'$ccls/call'})<CR>
+nn <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+let g:LanguageClient_hoverPreview = 'Always'
