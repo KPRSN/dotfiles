@@ -156,6 +156,7 @@ Plug 'sheerun/vim-polyglot'           " Massive language pack (syntax highlight 
 Plug 'tpope/vim-fugitive'             " A lot of GIT.
 Plug 'skywind3000/asyncrun.vim'       " Asyncronous building.
 Plug 'itchyny/lightline.vim'          " Status line.
+Plug 'vim-scripts/DoxygenToolkit.vim' " Generate doxygen headers.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
 
 " LSP client for references, definitions, renaming etc.
