@@ -54,9 +54,11 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 " Fuzzy-find git grep
-" - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}),
+  \   <bang>0)
 
 " Use space as leader key
 let mapleader = "\<Space>"
