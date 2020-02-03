@@ -5,6 +5,9 @@ export ZPLUG_REPOS="${HOME}/.local/share/zplug"
 export ZPLUG_BIN="${HOME}/.local/bin"
 source "${ZPLUG_HOME}/init.zsh"
 
+# A decent editor
+export EDITOR=vim
+
 # Aliases
 alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
@@ -33,18 +36,33 @@ setopt autocd           # Change directory without cd
 # Allow comments in the shell
 setopt interactive_comments
 
+# Use emacs bindings
+bindkey -e
+
 # Make C-w kill words properly
 autoload -U select-word-style
 select-word-style bash
 
+# Home, end and delete keymapping
+bindkey  '^[[1~' beginning-of-line
+bindkey  '^[[4~' end-of-line
+bindkey  '^[[3~' delete-char
+
+# Patterns in searches
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^S' history-incremental-pattern-search-forward
+
 # Add some plugs
-zplug 'zplug/zplug', hook-build:'zplug --self-manage' # ZPlug self management
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Basic stuff from zsh-users
 zplug 'zsh-users/zsh-completions', defer:0
 zplug 'zsh-users/zsh-autosuggestions', defer:2, on:'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:3, on:'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-history-substring-search', defer:3, on:'zsh-users/zsh-syntax-highlighting'
+
+# Things from Oh My
+zplug 'plugins/colored-man-pages', from:oh-my-zsh
 
 # Powerlevel 10k theme
 zplug 'romkatv/powerlevel10k', as:theme, depth:1
@@ -59,3 +77,6 @@ zplug load
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Source some private stuff
+test -f "${HOME}/.zshrc_private" && source "${HOME}/.zshrc_private"
