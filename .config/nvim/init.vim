@@ -66,6 +66,9 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}),
   \   <bang>0)
 
+" Always preview
+let g:fzf_preview_window = 'right:50%'
+
 " Use space as leader key
 let mapleader = "\<Space>"
 
