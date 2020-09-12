@@ -170,6 +170,9 @@ Plug 'vim-scripts/DoxygenToolkit.vim' " Generate doxygen headers.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
 Plug 'airblade/vim-gitgutter'         " Git diff in the sign column.
 
+" Clang format with bug fix for Neovim 0.5.0.
+Plug 'Kypert/vim-clang-format', { 'branch' : 'fix/issues/98' }
+
 " LSP client for references, definitions, renaming etc.
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -207,3 +210,15 @@ let g:LanguageClient_hasSnippetSupport = 0
 nn <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 let g:LanguageClient_hoverPreview = 'Always'
+
+" Clang format setup
+" let g:clang_format#detect_style_file = 1
+" let g:clang_format#auto_formatexpr = 1 " Added as gq
+" let g:clang_format#command = '/path/to/clang-format'
+
+" let g:clang_format#style_options = {
+"             \ "AccessModifierOffset" : -4,
+"             \ "AllowShortIfStatementsOnASingleLine" : "true",
+"             \ "AlwaysBreakTemplateDeclarations" : "true",
+"             \ "Standard" : "C++11",
+"             \ "BreakBeforeBraces" : "Stroustrup"}
