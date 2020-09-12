@@ -34,6 +34,12 @@ set splitright
 " Live substitutions
 set inccommand=nosplit
 
+" Make things such as git gutter update more quickly
+set updatetime=100
+
+" Always show sign column/git gutter
+set signcolumn=yes
+
 " Highlight lines overflowing 120 characters
 call matchadd('ErrorMsg', "\\%120v.\\+", 100)
 
@@ -135,6 +141,10 @@ let g:pear_tree_smart_backspace = 1
 let g:asyncrun_open = 20
 let g:asyncrun_last = 2
 
+" Customize git gutter
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_diff_args = '--diff-algorithm=histogram'
+
 " Vim-plug
 call plug#begin('~/.vim/plugged')
 
@@ -158,6 +168,7 @@ Plug 'skywind3000/asyncrun.vim'       " Asyncronous building.
 Plug 'itchyny/lightline.vim'          " Status line.
 Plug 'vim-scripts/DoxygenToolkit.vim' " Generate doxygen headers.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
+Plug 'airblade/vim-gitgutter'         " Git diff in the sign column.
 
 " LSP client for references, definitions, renaming etc.
 Plug 'autozimu/LanguageClient-neovim', {
