@@ -104,7 +104,6 @@ let mapleader = "\<Space>"
 :nmap <leader>j <C-w>j
 :nmap <leader>k <C-w>k
 :nmap <leader>l <C-w>l
-:nmap <leader>p <C-w>p
 
 " Less snappy window switching
 :nmap <leader>wh <C-w>h
@@ -117,6 +116,12 @@ let mapleader = "\<Space>"
 :nmap <leader>wc <C-w>c
 :nmap <leader>w/ :vs<CR>
 :nmap <leader>w- :sp<CR>
+
+" Navigating tabs
+:nmap <leader>t :tabnew<CR>
+:nmap <leader>T :tabclose<CR>
+:nmap <leader>n gt
+:nmap <leader>p gT
 
 " Save all files and build
 ":nmap <leader>cc :AsyncRun -save=2 BUILDCOMMAND<CR>
