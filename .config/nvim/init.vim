@@ -198,6 +198,10 @@ let g:nord_cursor_line_number_background = 1
 let g:lightline = { 'colorscheme': 'nord' }
 colorscheme nord
 
+" Make targets.vim prefer multiline targets, in order to correctly operate
+" on the first argument after a line break in a multiline argument list.
+let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
+
 " CCLS LSP Setup
 "let ccls_path = '/path/to/ccls'
 "let g:LanguageClient_serverCommands = {
