@@ -198,6 +198,11 @@ let g:nord_cursor_line_number_background = 1
 let g:lightline = { 'colorscheme': 'nord' }
 colorscheme nord
 
+" Give git gutter reasonable key bindings.
+:nmap ghs <Plug>(GitGutterStageHunk)
+:nmap ghu <Plug>(GitGutterUndoHunk)
+:nmap ghp <Plug>(GitGutterPreviewHunk)
+
 " Make targets.vim prefer multiline targets, in order to correctly operate
 " on the first argument after a line break in a multiline argument list.
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
