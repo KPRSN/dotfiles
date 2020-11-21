@@ -5,6 +5,11 @@ export ZPLUG_REPOS="${HOME}/.local/share/zplug"
 export ZPLUG_BIN="${HOME}/.local/bin"
 source "${ZPLUG_HOME}/init.zsh"
 
+# Language
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # A decent editor
 export EDITOR=vim
 
