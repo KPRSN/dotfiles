@@ -172,6 +172,7 @@ Plug 'tpope/vim-repeat'               " Let plugins repeatsuff with dot.
 Plug 'tpope/vim-abolish'              " Preserve case substitute neatly with :S.
 Plug 'machakann/vim-sandwich'         " Surround stuff with sa, sd and sr.
 Plug 'junegunn/vim-easy-align'        " Align stuff with ga.
+Plug 'junegunn/vim-peekaboo'          " See what's stored in registers.
 Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces
 Plug 'nathanalderson/yang.vim'        " YANG syntax.
 Plug 'wellle/targets.vim'             " Add more targets, like cia (in argument).
@@ -215,6 +216,31 @@ colorscheme nord
 " Make targets.vim prefer multiline targets, in order to correctly operate
 " on the first argument after a line break in a multiline argument list.
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
+
+" Make vim-peekaboo live in a floating window instead of in a split.
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+    let top = '╭' . repeat('─', width - 2) . '╮'
+    let mid = '│' . repeat(' ', width - 2) . '│'
+    let bot = '╰' . repeat('─', width - 2) . '╯'
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
+endfunction
+let g:peekaboo_window = 'call CreateCenteredFloatingWindow()'
+let g:peekaboo_delay = 0
 
 " CCLS LSP Setup
 "let ccls_path = '/path/to/ccls'
