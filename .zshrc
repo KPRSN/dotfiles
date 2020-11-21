@@ -28,6 +28,7 @@ setopt extended_history       # Write history in :start:elasped;command format
 setopt hist_expire_dups_first # Expire duplicates first when trimming history
 setopt hist_find_no_dups      # Don't repeat when searching history
 setopt hist_ignore_dups       # Ignore duplicates
+setopt hist_ignore_space      # Ignore commands beginning with space
 setopt hist_reduce_blanks     # Remove extra blanks from each command added to history
 setopt hist_verify            # Don't execute immediately upon history expansion
 setopt inc_append_history     # Write to history file immediately, not when shell quits
