@@ -3,6 +3,7 @@
     st = status
     amend = commit --amend
     append = commit --amend --no-edit
+    recommit = commit -C HEAD@{1}
     staged = diff --staged
     hi = ! git hist -n 10
     recent-branches = ! git for-each-ref --format='%(HEAD) %(refname:short),%(committerdate:relative)' --sort=-committerdate refs/heads/ | column -t -s ','
