@@ -262,6 +262,7 @@ let g:LanguageClient_hasSnippetSupport = 0
 nn <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 let g:LanguageClient_hoverPreview = 'Always'
+let g:LanguageClient_useVirtualText = 'Diagnostics'
 
 " Clang format setup
 " let g:clang_format#detect_style_file = 1
