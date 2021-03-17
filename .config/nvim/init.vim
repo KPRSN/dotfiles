@@ -217,6 +217,9 @@ colorscheme nord
 " on the first argument after a line break in a multiline argument list.
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
 
+" Make vim-sandwich use vim-surround keybindings in order to not steal 's'.
+runtime macros/sandwich/keymap/surround.vim
+
 " Make vim-peekaboo live in a floating window instead of in a split.
 function! CreateCenteredFloatingWindow()
     let width = float2nr(&columns * 0.6)
