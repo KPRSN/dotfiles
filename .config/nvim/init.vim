@@ -84,12 +84,12 @@ let mapleader = "\<Space>"
 :nmap <leader>fa :call CurtineIncSw()<CR>
 
 " Git greping
-:nmap <leader>fg :GGrep 
-:nmap <leader>/ :GGrep <C-R>=expand("<cword>")<CR>
-:nmap <leader>* :GGrep <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>fg :Git grep 
+:nmap <leader>/ :Git grep <C-R>=expand("<cword>")<CR>
+:nmap <leader>* :Git grep <C-R>=expand("<cword>")<CR><CR>
 
 " Git blaming
-:nmap <leader>gb :Gblame<CR>
+:nmap <leader>gb :Git blame<CR>
 
 " Buffers
 :nmap <leader>bb :Buffers<CR>
