@@ -59,40 +59,19 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-" Fuzzy-find git grep
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}),
-  \   <bang>0)
-
-" Always preview
-let g:fzf_preview_window = 'right:50%'
-
 " Use space as leader key
 let mapleader = "\<Space>"
 
 " Quickly remove search highlighting
 :nmap <leader><leader> :nohlsearch<CR>
 
-" Finding files
-:nmap <leader>ff :FZF <CR>
-:nmap <leader>fF :FZF <C-R>=expand("%:p:h")<CR>
-:nmap <leader>fr :FZF %:p:h<CR>
-
 " Jumping between header and source
 :nmap <leader>fa :call CurtineIncSw()<CR>
-
-" Git greping
-:nmap <leader>fg :Git grep 
-:nmap <leader>/ :Git grep <C-R>=expand("<cword>")<CR>
-:nmap <leader>* :Git grep <C-R>=expand("<cword>")<CR><CR>
 
 " Git blaming
 :nmap <leader>gb :Git blame<CR>
 
 " Buffers
-:nmap <leader>bb :Buffers<CR>
 :nmap <leader>bd :Bdelete<CR>
 :nmap <leader>bD :Bwipeout<CR>
 
@@ -146,6 +125,16 @@ let mapleader = "\<Space>"
 " Previous buffer
 :nmap <leader><Tab> <C-^>
 
+" Telescope navigation
+:nmap <leader>ff :Telescope find_files<CR>
+:nmap <leader>fb :Telescope buffers<CR>
+:nmap <leader>bb :Telescope buffers<CR>
+:nmap <leader>fg :Telescope live_grep<CR>
+
+" LSP actions
+:nmap <leader>gr :Telescope lsp_references<CR>
+:nmap <leader>gd :Telescope lsp_definitions<CR>
+
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -190,6 +179,12 @@ Plug 'itchyny/lightline.vim'          " Status line.
 Plug 'vim-scripts/DoxygenToolkit.vim' " Generate doxygen headers.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
 Plug 'airblade/vim-gitgutter'         " Git diff in the sign column.
+Plug 'neovim/nvim-lspconfig'          " Decent default configs for the builtin LSP.
+
+" Telescope and friends.
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Clang format with bug fix for Neovim 0.5.0.
 Plug 'Kypert/vim-clang-format', { 'branch' : 'fix/issues/98' }
@@ -199,10 +194,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-
-" Fuzzy find.
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -248,28 +239,6 @@ endfunction
 let g:peekaboo_window = 'call CreateCenteredFloatingWindow()'
 let g:peekaboo_delay = 0
 
-" CCLS LSP Setup
-"let ccls_path = '/path/to/ccls'
-"let g:LanguageClient_serverCommands = {
-"    \ 'c': [ccls_path, '--log-file=/tmp/cc.log'],
-"    \ 'cpp': [ccls_path, '--log-file=/tmp/cc.log'],
-"    \ }
-
-"let g:LanguageClient_loadSettings = 1
-"let g:LanguageClient_settingsPath = expand('~/.config/nvim/lsp_settings.json')
-
-" https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
-let g:LanguageClient_hasSnippetSupport = 0
-
-:nmap <leader>gg :call LanguageClient_contextMenu()<CR>
-:nmap <leader>gd :call LanguageClient#textDocument_definition()<CR>
-:nmap <leader>gr :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
-:nmap <leader>gR :call LanguageClient#findLocations({'method':'$ccls/call'})<CR>
-nn <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-let g:LanguageClient_hoverPreview = 'Always'
-let g:LanguageClient_useVirtualText = 'Diagnostics'
-
 " Clang format setup
 " let g:clang_format#detect_style_file = 1
 " let g:clang_format#auto_formatexpr = 1 " Added as gq
@@ -281,3 +250,9 @@ let g:LanguageClient_useVirtualText = 'Diagnostics'
 "             \ "AlwaysBreakTemplateDeclarations" : "true",
 "             \ "Standard" : "C++11",
 "             \ "BreakBeforeBraces" : "Stroustrup"}
+
+" Fuzzy finding in telescope.
+lua require('telescope').load_extension('fzf')
+
+" Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
+lua require('lspconfig').ccls.setup{}
