@@ -72,6 +72,9 @@ let g:fzf_preview_window = 'right:50%'
 " Use space as leader key
 let mapleader = "\<Space>"
 
+" Quickly remove search highlighting
+:nmap <leader><leader> :nohlsearch<CR>
+
 " Finding files
 :nmap <leader>ff :FZF <CR>
 :nmap <leader>fF :FZF <C-R>=expand("%:p:h")<CR>
