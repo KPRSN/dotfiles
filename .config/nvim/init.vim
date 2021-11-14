@@ -5,147 +5,39 @@ endif
 set list listchars=tab:>\ ,trail:-,eol:$
 set nolist
 
-" Relative/hybrid line numbering
+" Relative/hybrid line numbering.
 set relativenumber
 set number
 
-" Tabs are four spaces
+" Tabs are four spaces.
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" Case insensitive-ish search
+" Case insensitive-ish search.
 set ignorecase
 set smartcase
 
-" Highlight the current line
+" Highlight the current line.
 set cursorline
 
-" Align function arguments
-:set cino+=(0
+" Align function arguments.
+set cino+=(0
 
-" Copy to the end of line
-noremap Y y$
-
-" Split new windows below or to the right
+" Split new windows below or to the right.
 set splitbelow
 set splitright
 
-" Live substitutions
+" Live substitutions.
 set inccommand=nosplit
 
-" Make things such as git gutter update more quickly
+" Make things such as git gutter update more quickly.
 set updatetime=100
 
-" Always show sign column/git gutter
+" Always show sign column/git gutter.
 set signcolumn=yes
 
-" Highlight lines overflowing 120 characters
-call matchadd('ErrorMsg', "\\%120v.\\+", 100)
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid, when inside an event handler
-" (happens when dropping a file on gvim) and for a commit message (it's
-" likely a different one than last time).
-autocmd BufReadPost *
-  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-  \ |   exe "normal! g`\""
-  \ | endif
-
-" Only show cursor line in active window
-augroup CursorLineOnlyInActiveWindow
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
-
-" Use space as leader key
-let mapleader = "\<Space>"
-
-" Quickly remove search highlighting
-:nmap <leader><leader> :nohlsearch<CR>
-
-" Jumping between header and source
-:nmap <leader>fa :call CurtineIncSw()<CR>
-
-" Git blaming
-:nmap <leader>gb :Git blame<CR>
-
-" Saving and quitting
-:nmap <leader>qa :qa<CR>
-:nmap <leader>qa! :qa!<CR>
-:nmap <leader>q! :q!<CR>
-:nmap <leader>w! :w!<CR>
-
-" Snappy window switching
-:nmap <leader>h <C-w>h
-:nmap <leader>j <C-w>j
-:nmap <leader>k <C-w>k
-:nmap <leader>l <C-w>l
-
-" Less snappy window switching
-:nmap <leader>wh <C-w>h
-:nmap <leader>wj <C-w>j
-:nmap <leader>wk <C-w>k
-:nmap <leader>wl <C-w>l
-:nmap <leader>wp <C-w>p
-
-" Opening and closing windows
-:nmap <leader>wc <C-w>c
-:nmap <leader>w/ :vs<CR>
-:nmap <leader>w- :sp<CR>
-
-" Navigating tabs
-:nmap <leader>t :tabnew<CR>
-:nmap <leader>T :tabclose<CR>
-:nmap <leader>n gt
-:nmap <leader>p gT
-:nmap <leader>1 1gt
-:nmap <leader>2 2gt
-:nmap <leader>3 3gt
-:nmap <leader>4 4gt
-:nmap <leader>5 5gt
-:nmap <leader>6 6gt
-:nmap <leader>7 7gt
-:nmap <leader>8 8gt
-:nmap <leader>9 9gt
-
-" Open and close the quickfix window
-:nmap <leader>co :copen<CR>
-:nmap <leader>ch :cclose<CR>
-
-" Previous buffer
-:nmap <leader><Tab> <C-^>
-
-" Telescope navigation
-:nmap <leader>ff :Telescope find_files<CR>
-:nmap <leader>fb :Telescope buffers<CR>
-:nmap <leader>bb :Telescope buffers<CR>
-:nmap <leader>fg :Telescope live_grep<CR>
-:nmap <leader>* :Telescope grep_string search=<C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>/ :Telescope grep_string search=<C-R>=expand("<cword>")<CR>
-
-" LSP actions
-:nmap <leader>gr :Telescope lsp_references<CR>
-:nmap <leader>gd :Telescope lsp_definitions<CR>
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Enable smart pairs (e.g. parenthesis, brackets and stuff)
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-let g:pear_tree_ft_disabled = ["TelescopePrompt"]
-
-" Customize git gutter
-let g:gitgutter_preview_win_floating = 1
-let g:gitgutter_diff_args = '--diff-algorithm=histogram'
-
-" Vim-plug
+" Vim-plug.
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'             " Sensible default settings.
@@ -156,7 +48,7 @@ Plug 'tpope/vim-abolish'              " Preserve case substitute neatly with :S.
 Plug 'machakann/vim-sandwich'         " Surround stuff with sa, sd and sr.
 Plug 'junegunn/vim-easy-align'        " Align stuff with ga.
 Plug 'junegunn/vim-peekaboo'          " See what's stored in registers.
-Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces
+Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces.
 Plug 'nathanalderson/yang.vim'        " YANG syntax.
 Plug 'wellle/targets.vim'             " Add more targets, like cia (in argument).
 Plug 'ericcurtin/CurtineIncSw.vim'    " Toggle header/src (C/C++).
@@ -186,17 +78,125 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 call plug#end()
 
-" Colorscheme
+" Highlight lines overflowing 120 characters.
+call matchadd('ErrorMsg', "\\%120v.\\+", 100)
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid, when inside an event handler
+" (happens when dropping a file on gvim) and for a commit message (it's
+" likely a different one than last time).
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
+
+" Only show cursor line in active window.
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
+" Copy to the end of line.
+noremap Y y$
+
+" Use space as leader key.
+let mapleader = "\<Space>"
+
+" Quickly remove search highlighting.
+nnoremap <leader><leader> :nohlsearch<CR>
+
+" Jumping between header and source.
+nnoremap <leader>fa :call CurtineIncSw()<CR>
+
+" Git blaming.
+nnoremap <leader>gb :Git blame<CR>
+
+" Saving and quitting.
+nnoremap <leader>qa :qa<CR>
+nnoremap <leader>qa! :qa!<CR>
+nnoremap <leader>q! :q!<CR>
+nnoremap <leader>w! :w!<CR>
+
+" Snappy window switching.
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+" Less snappy window switching.
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wp <C-w>p
+
+" Opening and closing windows.
+nnoremap <leader>wc <C-w>c
+nnoremap <leader>w/ :vs<CR>
+nnoremap <leader>w- :sp<CR>
+
+" Navigating tabs.
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>T :tabclose<CR>
+nnoremap <leader>n gt
+nnoremap <leader>p gT
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
+" Open and close the quickfix window.
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>ch :cclose<CR>
+
+" Previous buffer.
+nnoremap <leader><Tab> <C-^>
+
+" Telescope navigation.
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fb :Telescope buffers<CR>
+nnoremap <leader>bb :Telescope buffers<CR>
+nnoremap <leader>fg :Telescope live_grep<CR>
+nnoremap <leader>* :Telescope grep_string search=<C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>/ :Telescope grep_string search=<C-R>=expand("<cword>")<CR>
+
+" LSP actions.
+nnoremap <leader>gr :Telescope lsp_references<CR>
+nnoremap <leader>gd :Telescope lsp_definitions<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga).
+xnoremap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip).
+nnoremap ga <Plug>(EasyAlign)
+
+" Enable smart pairs (e.g. parenthesis, brackets and stuff).
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_ft_disabled = ["TelescopePrompt"]
+
+" Customize git gutter
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_diff_args = '--diff-algorithm=histogram'
+
+" Colorscheme.
 let g:nord_cursor_line_number_background = 1
 let g:lightline = { 'colorscheme': 'nord' }
 colorscheme nord
 
 " Give git gutter reasonable key bindings.
-:nmap ghs <Plug>(GitGutterStageHunk)
-:nmap ghu <Plug>(GitGutterUndoHunk)
-:nmap ghp <Plug>(GitGutterPreviewHunk)
+nnoremap ghs <Plug>(GitGutterStageHunk)
+nnoremap ghu <Plug>(GitGutterUndoHunk)
+nnoremap ghp <Plug>(GitGutterPreviewHunk)
 
-" Make targets.vim prefer multiline targets, in order to correctly operate
+" Make targets.vim prefer multiline targets, in order to correctly operate.
 " on the first argument after a line break in a multiline argument list.
 let g:targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
 
