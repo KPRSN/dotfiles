@@ -141,6 +141,7 @@ nmap ga <Plug>(EasyAlign)
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+let g:pear_tree_ft_disabled = ["TelescopePrompt"]
 
 " Customize git gutter
 let g:gitgutter_preview_win_floating = 1
@@ -247,3 +248,23 @@ lua require('telescope').load_extension('fzf')
 
 " Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
 lua require('lspconfig').ccls.setup{}
+
+lua << EOS
+-- Fuzzy finding in telescope.
+require('telescope').load_extension('fzf')
+
+-- Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
+require('lspconfig').ccls.setup{}
+
+-- Map ESC to quit telescope when in insert mode.
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
+  }
+}
+EOS
