@@ -71,10 +71,6 @@ let mapleader = "\<Space>"
 " Git blaming
 :nmap <leader>gb :Git blame<CR>
 
-" Buffers
-:nmap <leader>bd :Bdelete<CR>
-:nmap <leader>bD :Bwipeout<CR>
-
 " Saving and quitting
 :nmap <leader>qa :qa<CR>
 :nmap <leader>qa! :qa!<CR>
@@ -164,7 +160,6 @@ Plug 'ntpeters/vim-better-whitespace' " StripWhitespace for trailing spaces
 Plug 'nathanalderson/yang.vim'        " YANG syntax.
 Plug 'wellle/targets.vim'             " Add more targets, like cia (in argument).
 Plug 'ericcurtin/CurtineIncSw.vim'    " Toggle header/src (C/C++).
-Plug 'moll/vim-bbye'                  " Close and delete buffers (Bdelete/Bwipeout).
 Plug 'tmsvg/pear-tree'                " Pair parenthesis automagically (alt. jiangmiao/auto-pairs).
 Plug 'chaoren/vim-wordmotion'         " Delimit words by underscores and camelcases.
 Plug 'sheerun/vim-polyglot'           " Massive language pack (syntax highlight everything).
