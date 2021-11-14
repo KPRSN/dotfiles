@@ -126,6 +126,8 @@ let mapleader = "\<Space>"
 :nmap <leader>fb :Telescope buffers<CR>
 :nmap <leader>bb :Telescope buffers<CR>
 :nmap <leader>fg :Telescope live_grep<CR>
+:nmap <leader>* :Telescope grep_string search=<C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>/ :Telescope grep_string search=<C-R>=expand("<cword>")<CR>
 
 " LSP actions
 :nmap <leader>gr :Telescope lsp_references<CR>
@@ -243,12 +245,6 @@ let g:peekaboo_delay = 0
 "             \ "Standard" : "C++11",
 "             \ "BreakBeforeBraces" : "Stroustrup"}
 
-" Fuzzy finding in telescope.
-lua require('telescope').load_extension('fzf')
-
-" Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
-lua require('lspconfig').ccls.setup{}
-
 lua << EOS
 -- Fuzzy finding in telescope.
 require('telescope').load_extension('fzf')
@@ -262,7 +258,9 @@ require('telescope').setup{
   defaults = {
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous
       },
     },
   }
