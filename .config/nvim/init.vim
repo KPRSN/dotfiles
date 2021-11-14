@@ -114,10 +114,6 @@ let mapleader = "\<Space>"
 :nmap <leader>8 8gt
 :nmap <leader>9 9gt
 
-" Save all files and build
-":nmap <leader>cc :AsyncRun -save=2 BUILDCOMMAND<CR>
-":nmap <leader>cC :AsyncRun -save=2 BUILDCOMMAND
-
 " Open and close the quickfix window
 :nmap <leader>co :copen<CR>
 :nmap <leader>ch :cclose<CR>
@@ -146,10 +142,6 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 
-" Open quickfix window when building and let it scroll
-let g:asyncrun_open = 20
-let g:asyncrun_last = 2
-
 " Customize git gutter
 let g:gitgutter_preview_win_floating = 1
 let g:gitgutter_diff_args = '--diff-algorithm=histogram'
@@ -174,7 +166,6 @@ Plug 'tmsvg/pear-tree'                " Pair parenthesis automagically (alt. jia
 Plug 'chaoren/vim-wordmotion'         " Delimit words by underscores and camelcases.
 Plug 'sheerun/vim-polyglot'           " Massive language pack (syntax highlight everything).
 Plug 'tpope/vim-fugitive'             " A lot of GIT.
-Plug 'skywind3000/asyncrun.vim'       " Asyncronous building.
 Plug 'itchyny/lightline.vim'          " Status line.
 Plug 'vim-scripts/DoxygenToolkit.vim' " Generate doxygen headers.
 Plug 'arcticicestudio/nord-vim'       " Nord theme.
