@@ -162,6 +162,7 @@ nnoremap <leader><Tab> <C-^>
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fb :Telescope buffers<CR>
 nnoremap <leader>bb :Telescope buffers<CR>
+nnoremap <leader>fe :Telescope file_browser dir_icon=+<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
 nnoremap <leader>* :Telescope grep_string search=<C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>/ :Telescope grep_string search=<C-R>=expand("<cword>")<CR>
@@ -249,7 +250,7 @@ require('lspconfig').ccls.setup{}
 
 -- Map ESC to quit telescope when in insert mode.
 local actions = require('telescope.actions')
-require('telescope').setup{
+require('telescope').setup {
   defaults = {
     mappings = {
       i = {
