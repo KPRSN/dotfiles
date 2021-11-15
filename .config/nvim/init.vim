@@ -79,7 +79,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 call plug#end()
 
 " Highlight lines overflowing 120 characters.
-call matchadd('ErrorMsg', "\\%120v.\\+", 100)
+autocmd FileType c,cpp,python,vim,bash,yaml call matchadd('ErrorMsg', "\\%120v.\\+", 100)
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid, when inside an event handler
