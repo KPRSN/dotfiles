@@ -179,6 +179,7 @@ nnoremap <leader>fe :Telescope file_browser dir_icon=+<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
 nnoremap <leader>* :Telescope grep_string search=<C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>/ :Telescope grep_string search=<C-R>=expand("<cword>")<CR>
+nnoremap <leader>s :Telescope current_buffer_fuzzy_find<CR>
 
 " LSP actions.
 nnoremap <leader>gr :Telescope lsp_references<CR>
@@ -209,6 +210,8 @@ colorscheme nord
 nnoremap ghs <Plug>(GitGutterStageHunk)
 nnoremap ghu <Plug>(GitGutterUndoHunk)
 nnoremap ghp <Plug>(GitGutterPreviewHunk)
+nnoremap gh[ <Plug>(GitGutterNextHunk)
+nnoremap gh] <Plug>(GitGutterPrevHunk)
 
 " Make targets.vim prefer multiline targets, in order to correctly operate.
 " on the first argument after a line break in a multiline argument list.
