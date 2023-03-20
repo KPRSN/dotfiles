@@ -53,6 +53,9 @@ xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
+" Spell check comments please.
+set spell
+
 " Vim-plug.
 call plug#begin('~/.vim/plugged')
 
