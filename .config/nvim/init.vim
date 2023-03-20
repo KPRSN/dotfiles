@@ -89,12 +89,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " Clang format with bug fix for Neovim 0.5.0.
 Plug 'Kypert/vim-clang-format', { 'branch' : 'fix/issues/98' }
 
-" LSP client for references, definitions, renaming etc.
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
 call plug#end()
 
 " Highlight lines overflowing 120 characters.
@@ -261,11 +255,17 @@ let g:peekaboo_delay = 0
 "             \ "BreakBeforeBraces" : "Stroustrup"}
 
 lua << EOS
+-- LSP keybindings.
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+
 -- Fuzzy finding in telescope.
 require('telescope').load_extension('fzf')
 
 -- Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
-require('lspconfig').ccls.setup{}
+require('lspconfig').clangd.setup{}
 
 -- Map ESC to quit telescope when in insert mode.
 local actions = require('telescope.actions')
