@@ -267,7 +267,7 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 -- Fuzzy finding in telescope.
 require('telescope').load_extension('fzf')
 
--- Attempt to run CCLS with builtin LSP. Make sure CCLS is in the path.
+-- Attempt to run clangd with builtin LSP. Make sure clangd is in the path.
 require('lspconfig').clangd.setup{}
 
 -- Map ESC to quit telescope when in insert mode.
