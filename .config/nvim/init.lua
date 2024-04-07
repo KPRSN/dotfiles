@@ -65,6 +65,9 @@ require('lazy').setup({
   {
     'neovim/nvim-lspconfig',
     opts = { },
+    keys = {
+      { '<leader>fa', "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header (clangd)" },
+    },
     config = function()
       require('lspconfig').clangd.setup{ }
     end,
