@@ -11,3 +11,5 @@
     lineNumber = true
 [core]
     editor = vim
+[rerere]
+	enabled = true
