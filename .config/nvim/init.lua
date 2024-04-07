@@ -171,11 +171,11 @@ require('lazy').setup({
       },
     },
     keys = {
-      { '<leader>ghs', function() require("gitsigns").stage_hunk() end },
-      { '<leader>ghu', function() require("gitsigns").reset_hunk() end },
-      { '<leader>ghp', function() require("gitsigns").preview_hunk() end },
-      { '<leader>gh[', function() require("gitsigns").prev_hunk() end },
-      { '<leader>gh]', function() require("gitsigns").next_hunk() end },
+      { '<leader>gs', function() require("gitsigns").stage_hunk() end },
+      { '<leader>gu', function() require("gitsigns").reset_hunk() end },
+      { '<leader>gp', function() require("gitsigns").preview_hunk() end },
+      { '<leader>g[', function() require("gitsigns").prev_hunk() end },
+      { '<leader>g]', function() require("gitsigns").next_hunk() end },
     },
   },
 
