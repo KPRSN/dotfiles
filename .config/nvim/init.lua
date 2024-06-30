@@ -162,6 +162,7 @@ require('lazy').setup({
   -- Git right in the gutter.
   {
     'lewis6991/gitsigns.nvim',
+    lazy = false, -- Make the gutter come to life.
     opts = {
       signs = {
         add = { text = '+' },
