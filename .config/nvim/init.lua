@@ -232,9 +232,10 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 -- Tabs are four spaces.
-vim.bo.tabstop = 4
-vim.bo.shiftwidth = 4
-vim.bo.expandtab = true
+vim.o.tabstop = 4      -- Tabs look like 4 spaces.
+vim.o.shiftwidth = 4   -- Number of spaces inserted on indentation.
+vim.o.softtabstop = 4  -- Number of spaces inserted when tab is pressed.
+vim.o.expandtab = true -- Tabs are expanded to spaces.
 
 -- Case insensitive-ish search.
 vim.o.ignorecase = true
