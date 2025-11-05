@@ -41,6 +41,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',             -- A lot of GIT.
   'tpope/vim-repeat',               -- Let plugins repeat stuff with dot.
   'vim-scripts/DoxygenToolkit.vim', -- Generate doxygen headers.
+  'neovim/nvim-lspconfig',          -- Default LSP configs.
 
   -- A little bit of everything.
   {
@@ -291,7 +292,9 @@ vim.keymap.set('n', '<leader>9', '9gt', opts)
 vim.keymap.set('n', '<leader><tab>', '<C-^>', opts)
 
 -- And a sprinkle of LSP.
+vim.lsp.enable('clangd')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 vim.keymap.set('v', '<leader>qf', vim.lsp.buf.format, opts)
+vim.keymap.set('n', '<leader>fa', '<cmd>ClangdSwitchSourceHeader<cr>', opts)
