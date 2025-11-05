@@ -2,11 +2,16 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Dracula colorscheme...
+-- Catppuccin colorscheme...
 local colorscheme = {
-  repo = 'dracula/vim',
-  name = 'dracula',
+  repo = 'catppuccin/nvim',
+  name = 'catppuccin',
 }
+-- ...or Dracula...
+-- local colorscheme = {
+--   repo = 'dracula/vim',
+--   name = 'dracula',
+-- }
 -- ...or good old Nord.
 -- local colorscheme = {
 --   repo = 'arcticicestudio/nord-vim',
@@ -61,17 +66,10 @@ require('lazy').setup({
     end,
   },
 
-  -- LSP
+  -- Automatically switch on darkmode.
   {
-    'neovim/nvim-lspconfig',
-    opts = { },
-    lazy = false,
-    keys = {
-      { '<leader>fa', "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch source/header (clangd)" },
-    },
-    config = function()
-      require('lspconfig').clangd.setup{ }
-    end,
+    "f-person/auto-dark-mode.nvim",
+    opts = {},
   },
 
   -- Make LSP-based formatting behave.
@@ -142,6 +140,12 @@ require('lazy').setup({
     lazy = false,    -- Load colorscheme during startup.
     priority = 1000, -- Load before all other start plugins.
     config = function()
+      require('catppuccin').setup({
+        background = { -- :h background
+          light = "latte",
+          dark = "macchiato",
+        },
+      })
       vim.cmd("colorscheme " .. colorscheme.name)
     end,
   },
