@@ -78,7 +78,12 @@ require('lazy').setup({
     'stevearc/conform.nvim',
     opts = {},
     config = function()
-      require('conform').setup{ }
+      require('conform').setup({
+        formatters_by_ft = {
+          lua = {"stylua"},
+          go = {"gofmt"},
+        },
+      })
     end,
     init = function()
       -- Make 'gq' use conform with a reasonable timeout (for slow ass formatting).
@@ -293,6 +298,7 @@ vim.keymap.set('n', '<leader><tab>', '<C-^>', opts)
 
 -- And a sprinkle of LSP.
 vim.lsp.enable('clangd')
+vim.lsp.enable('gopls')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
