@@ -222,6 +222,7 @@ require('lazy').setup({
       { '<leader>s', function() require("telescope.builtin").current_buffer_fuzzy_find() end },
       { '<leader>gr', function() require("telescope.builtin").lsp_references() end },
       { '<leader>gd', function() require("telescope.builtin").lsp_definitions() end },
+      { '<leader>gi', function() require("telescope.builtin").lsp_implementations() end },
     },
   },
 
