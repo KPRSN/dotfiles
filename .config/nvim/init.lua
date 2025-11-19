@@ -257,11 +257,28 @@ vim.o.cursorline = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+-- Give windows a bit of bling.
+vim.o.winborder = 'rounded'
+
 -- Make sign column and friends a bit snappier.
 vim.o.updatetime = 250
 
 -- Always show the sign column.
 vim.o.signcolumn = 'yes'
+
+-- Set nice symbols and enable virtual text for diagnostics.
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    active = true,
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.HINT]  = "󰟃",
+      [vim.diagnostic.severity.INFO]  = "",
+    },
+  },
+})
 
 -- Quickly remove search highlighting.
 vim.keymap.set('n', '<leader><leader>', ':nohlsearch<CR>', opts)
