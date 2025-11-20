@@ -81,7 +81,12 @@ require('lazy').setup({
       require('conform').setup({
         formatters_by_ft = {
           lua = {"stylua"},
-          go = {"gofmt"},
+          go = {"gofmt", "golines"},
+        },
+        formatters = {
+          golines = {
+              args = { "--max-len=120", "--shorten-comments" }
+          },
         },
       })
     end,
