@@ -91,6 +91,46 @@ require('lazy').setup({
     end,
   },
 
+  -- Autocompletion at the flick of a button.
+  {
+    'saghen/blink.cmp',
+    opts = {
+      -- Show completion menu on <C-n> instead of the default <C-space>.
+      keymap = {
+        preset = 'none',
+
+        ['<C-n>'] = { 'show' , 'select_next', 'fallback_to_mappings' },
+        ['<C-e>'] = { 'hide', 'fallback' },
+        ['<C-y>'] = { 'select_and_accept', 'fallback' },
+
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+
+        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+
+        ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+      },
+
+      -- Disable automatic completion, for us old-fashioned souls.
+      completion = {
+        menu = {
+          auto_show = false,
+        },
+      },
+
+      -- Dependency-free fuzzieness.
+      fuzzy = { implementation = 'lua' },
+
+      -- Function signatures, yes please.
+      signature = { enabled = true },
+    },
+  },
+
   -- Reopen files at last known position.
   {
     'ethanholz/nvim-lastplace',
