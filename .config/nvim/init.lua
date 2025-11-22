@@ -34,14 +34,15 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Install packages/plugins.
 require('lazy').setup({
+  "f-person/auto-dark-mode.nvim",   -- Automatically switch on darkmode.
   'gennaro-tedesco/nvim-peekup',    -- Peek at registers.
   'nathanalderson/yang.vim',        -- YANG syntax.
+  'neovim/nvim-lspconfig',          -- Default LSP configs.
   'ntpeters/vim-better-whitespace', -- StripWhitespace for trailing spaces (could be replaced by mini).
   'tpope/vim-abolish',              -- Preserve case substitute neatly with :S.
   'tpope/vim-fugitive',             -- A lot of GIT.
   'tpope/vim-repeat',               -- Let plugins repeat stuff with dot.
   'vim-scripts/DoxygenToolkit.vim', -- Generate doxygen headers.
-  'neovim/nvim-lspconfig',          -- Default LSP configs.
 
   -- A little bit of everything.
   {
@@ -65,12 +66,6 @@ require('lazy').setup({
         }
       })
     end,
-  },
-
-  -- Automatically switch on darkmode.
-  {
-    "f-person/auto-dark-mode.nvim",
-    opts = {},
   },
 
   -- Make LSP-based formatting behave.
